@@ -3,7 +3,7 @@
 const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./config.json');
-
+const keepAlive = require('./server.js');
 const client = new Client({ intents: 
 	[
 		Intents.FLAGS.GUILDS,
@@ -49,3 +49,4 @@ for (const file of eventFiles) {
 
 client.login(token);
 
+keepAlive()
