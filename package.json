@@ -1,0 +1,23 @@
+{
+  "name": "aod-slash-cmds",
+  "version": "1.0.0",
+  "description": "idk",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "reg": "node deploy-commands.js"
+  },
+  "author": "Anmol",
+  "license": "MIT",
+  "dependencies": {
+    "@discordjs/rest": "^0.2.0-canary.0",
+    "canvas": "^2.8.0",
+    "chalk": "^4.1.2",
+    "discord-gamecord": "^2.0.0",
+    "discord-together": "^1.3.3",
+    "discord.js": "^13.6.0",
+    "moment": "^2.29.1",
+    "node-fetch": "^2.6.1",
+    "simply-djs": "^2.5.2"
+  }
+}
