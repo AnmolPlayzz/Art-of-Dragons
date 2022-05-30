@@ -135,6 +135,8 @@ client.on('interactionCreate', async interaction => {
   });
 
   client.on('interactionCreate', async interaction => {
+	const intdata = JSON.stringify(interaction.options.data).replace(/\"/g, '').replace(/\,/g, '\n').replace(/\:/g, ': ').replace(/\{/g, '----\n').replace(/\}/g, '\n----').replace(/\[/g, '').replace(/\]/g, '');
+	console.log(intdata);
 	const inlog = new Discord.MessageEmbed()
 	  .setAuthor(`Interaction Log`)
 	  .setTitle(`${interaction.member.user.tag}`)
@@ -146,6 +148,11 @@ client.on('interactionCreate', async interaction => {
 		{
 		  name: `Interaction`,
 		  value: `${interaction.commandName ? interaction.commandName : "Unknown - Probably a message component like buttons or select menus"}`,
+		  inline: true
+		},
+		{
+		  name: `Interaction options Data`,
+		  value: `\`\`\`json\n${intdata ? intdata : "No data"}\`\`\``,
 		  inline: true
 		},
 		{
