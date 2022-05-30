@@ -9,6 +9,7 @@ module.exports = {
         .addStringOption(option => option.setName('reason').setDescription('The reason behind this user\'s ban')),
     async execute(interaction, client) {
         try{
+        if(interaction.member.permissions.has('BAN_MEMBERS')) {
         const targe = interaction.options.getUser('user');
         const target = interaction.guild.members.cache.get(targe.id);
         const nomem = new Discord.MessageEmbed
@@ -63,13 +64,13 @@ module.exports = {
 
         if (target.user === interaction.member.user) return interaction.reply({ embeds: [self2] })
 
-        if (target.roles.highest.position > interaction.guild.members.cache.get("886825880771514378").roles.highest.position) return interaction.reply({ embeds: [h1] })
+        if (target.roles.highest.position > interaction.guild.members.cache.get("979985114392059914").roles.highest.position) return interaction.reply({ embeds: [h1] })
 
         if (target.roles.highest.position === interaction.member.roles.highest.position) return interaction.reply({ embeds: [h2] })
 
         if (target.roles.highest.position > interaction.member.roles.highest.position) return interaction.reply({ embeds: [h3] })
 
-        if (target.roles.highest.position === interaction.guild.members.cache.get("886825880771514378").roles.highest.position) return interaction.reply({ embeds: [h4] })
+        if (target.roles.highest.position === interaction.guild.members.cache.get("979985114392059914").roles.highest.position) return interaction.reply({ embeds: [h4] })
         
         const reason = interaction.options.getString('reason');
 
@@ -114,6 +115,9 @@ module.exports = {
             ])
             .setTimestamp()
         try {
+            target.send({ embed: embed2 })
+                 .catch(() => interaction.channel.send("_Failed to DM this user. Possible reasons are DMs Closed / This Bot is blocked by the user / The user is a Bot_"));
+
             target.ban({ reason: `${reason? reason : "No reason provided"}` }).then(
                 interaction.reply({ embeds: [embed] })
             )
@@ -121,6 +125,14 @@ module.exports = {
             interaction.reply('I am unable to ban this member')
             console.log(err)
         }
+    } else {
+        const no = new Discord.MessageEmbed
+        no
+            .setColor('DARK_RED')
+            .setDescription('<:No:901477337437204481> You do not have the `BAN_MEMBERS` permission!')
+
+        interaction.reply({ embeds: [no] })
+    }
         } catch(error) {
             console.log(error)
             interaction.reply('Error!')

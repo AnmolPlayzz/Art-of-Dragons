@@ -3,8 +3,7 @@ const Discord = require("discord.js");
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('info')
-		.setDescription('Stats about the bot.')
-		.addIntegerOption(option => option.setName('amount').setDescription('Number of interactions to prune')),
+		.setDescription('Stats about the bot.'),
 	async execute(interaction, client) {
 	    try {
 
