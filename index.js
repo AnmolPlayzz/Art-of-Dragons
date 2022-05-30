@@ -151,11 +151,6 @@ client.on('interactionCreate', async interaction => {
 		  inline: true
 		},
 		{
-		  name: `Interaction options Data`,
-		  value: `\`\`\`json\n${intdata ? intdata : "No data"}\`\`\``,
-		  inline: true
-		},
-		{
 		  name: `Interaction channel`,
 		  value: `${interaction.channel} (${interaction.channel.id})`,
 		  inline: true
@@ -186,6 +181,7 @@ client.on('interactionCreate', async interaction => {
 	
 	const MessageLog = client.channels.cache.find(channel => channel.id === "980767716686323714");
 	MessageLog.send({ embeds: [inlog] });
+	MessageLog.send(`Interaction Data:\n\`\`\`json\n${intdata}\`\`\``);
   });
   
 client.login(token);
