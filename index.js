@@ -1,6 +1,7 @@
 
 const fs = require('fs');
-const { Client, Collection, Intents } = require('discord.js');
+const { Client, Collection, Intents, MessageActionRow } = require('discord.js');
+const Discord = require("discord.js");
 const { token, clientId, guildId, log } = require('./config.json');
 const client = new Client({ intents: 
 	[
