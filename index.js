@@ -13,7 +13,8 @@ const client = new Client({ intents:
 		Intents.FLAGS.GUILDS,
 		Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
 		Intents.FLAGS.GUILD_BANS,
-	]
+	],
+	partials: ['MESSAGE', 'CHANNEL', 'REACTION']
  });
 
 // @ts-ignore
@@ -133,6 +134,51 @@ client.on('interactionCreate', async interaction => {
 	}
   });
 
+  client.on('interactionCreate', async interaction => {
+	const inlog = new Discord.MessageEmbed()
+	  .setAuthor(`Interaction Log`)
+	  .setTitle(`${interaction.member.user.tag}`)
+	  .setDescription(``)
+	  .setThumbnail(interaction.member.user.displayAvatarURL({ dynamic: true }))
+	  .setTimestamp()
+	  .setColor('BLURPLE')
+	  .addFields(
+		{
+		  name: `Interaction`,
+		  value: `${interaction.commandName ? interaction.commandName : "Unknown - Probably a message component like buttons or select menus"}`,
+		  inline: true
+		},
+		{
+		  name: `Interaction channel`,
+		  value: `${interaction.channel} (${interaction.channel.id})`,
+		  inline: true
+		},
+		{
+			name: `Type`,
+			value: `${interaction.type}`,
+			inline: true
+		},
+		{
+			name: `Custom ID`,
+			value: `${interaction.customId ? interaction.customId : "Unknown - Probably a slash command"} `,
+			inline: true
+		},
+		{
+			name: `Interaction ID`,
+			value: `${interaction.id}`,
+			inline: true
+		},
+		{
+			name: `Interaction Version`,
+			value: `${interaction.version}`,
+			inline: true
+		},
 
+	  );
+		
+	
+	const MessageLog = client.channels.cache.find(channel => channel.id === "980767716686323714");
+	MessageLog.send({ embeds: [inlog] });
+  });
   
 client.login(token);
