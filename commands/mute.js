@@ -143,6 +143,7 @@ module.exports = {
                          //adds the ban to the database in mongodb
             
                          clnt.db('BotDB').collection('Bans').insertOne({
+                             uid: target.id,
                              user: `${target.user.tag} (${target.user.id})`,
                              type: "Mute",
                              reason: reason ? reason : "No reason provided",

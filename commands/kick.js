@@ -121,7 +121,8 @@ module.exports = {
 
                 clnt.connect(err => {
 
-                    clnt.db('BotDB').collection('Bans').insertOne({
+                    clnt.db('BotDB').collection('Bans').insertMany({
+                        uid: target.id,
                         user: `${target.user.tag} (${target.user.id})`,
                         type: "Kick",
                         reason: reason ? reason : "No reason provided",

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "reg": "node deploy-commands.js"
+    "reg": "node deploy-commands.js",
+    "dep": "node deploy-commands.js && node index.js",
   },
   "author": "Anmol",
   "license": "MIT",

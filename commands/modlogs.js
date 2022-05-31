@@ -12,18 +12,17 @@ module.exports = {
             const ur = interaction.options.getUser('user');
             // get all logs from mongo db database based on id
             const logs = await clnt.db('BotDB').collection('Bans').find({
-                user: `${ur.tag} (${ur.id})`
+                uid: ur.id
             }).toArray();
 
             let count = 0;
-            //convert logs into text
             const logstext = logs.map(log => `**#${count = count+1}**\n❓ Reason: \`${log.reason}\`\n🗂 Type: \`${log.type}\`\n⚒ Mod: \`${log.moderator}\`\n📅 Date and time: \`${log.date}\``).join('\n\n');
             console.log(logstext);
             const embeds = new Discord.MessageEmbed()
                 .setColor('2f3136')
                 .setTitle(`Moderation logs for ${ur.tag}`)
                 .setThumbnail(ur.avatarURL())
-                .setDescription(logstext)
+                .setDescription(logstext ? logstext : 'No logs found.')
                 .setFooter(`Total logs: ${count}`);
             interaction.reply({embeds: [embeds]});
     } catch(error) {
