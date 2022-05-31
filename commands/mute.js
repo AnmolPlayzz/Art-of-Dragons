@@ -10,7 +10,7 @@ module.exports = {
         .addStringOption(option => option.setName('time').setDescription('The time to mute the user').setRequired(true))
         .addStringOption(option => option.setName('reason').setDescription('The reason behind this user\'s mute')),
 
-    async execute(interaction, client) {
+    async execute(interaction, client, clnt) {
         try {
         if(interaction.member.permissions.has('TIMEOUT_MEMBERS')) {
         const targe = interaction.options.getUser('user');
@@ -138,6 +138,19 @@ module.exports = {
    
                     target.send({ embeds: [embed2] })
                         .catch(() => interaction.channel.send("_Failed to DM this user. Possible reasons are DMs Closed / This Bot is blocked by the user / The user is a Bot_"));
+                    
+                     clnt.connect(err => {
+                         //adds the ban to the database in mongodb
+            
+                         clnt.db('BotDB').collection('Bans').insertOne({
+                             user: `${target.user.tag} (${target.user.id})`,
+                             type: "Mute",
+                             reason: reason ? reason : "No reason provided",
+                             moderator: `${interaction.user.tag} (${interaction.user.id})`,
+                             date: moment(interaction.createdAt).format('dddd, MMMM Do YYYY, HH:mm:ss')
+                         })
+            
+                     });
 
                 }catch(err) {
                     interaction.reply('I am unable to mute this member')

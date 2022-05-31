@@ -7,7 +7,7 @@ module.exports = {
         .setDescription('Ban a member!!')
         .addUserOption(option => option.setName('user').setDescription('The user to ban').setRequired(true,))
         .addStringOption(option => option.setName('reason').setDescription('The reason behind this user\'s ban')),
-    async execute(interaction, client) {
+    async execute(interaction, client, clnt) {
         try{
         if(interaction.member.permissions.has('BAN_MEMBERS')) {
         const targe = interaction.options.getUser('user');
@@ -64,13 +64,13 @@ module.exports = {
 
         if (target.user === interaction.member.user) return interaction.reply({ embeds: [self2] })
 
-        if (target.roles.highest.position > interaction.guild.members.cache.get("979985114392059914").roles.highest.position) return interaction.reply({ embeds: [h1] })
+        if (target.roles.highest.position > interaction.guild.me.roles.highest.position) return interaction.reply({ embeds: [h1] })
 
         if (target.roles.highest.position === interaction.member.roles.highest.position) return interaction.reply({ embeds: [h2] })
 
         if (target.roles.highest.position > interaction.member.roles.highest.position) return interaction.reply({ embeds: [h3] })
 
-        if (target.roles.highest.position === interaction.guild.members.cache.get("979985114392059914").roles.highest.position) return interaction.reply({ embeds: [h4] })
+        if (target.roles.highest.position === interaction.guild.me.roles.highest.position) return interaction.reply({ embeds: [h4] })
         
         const reason = interaction.options.getString('reason');
 
@@ -125,6 +125,18 @@ module.exports = {
             interaction.reply('I am unable to ban this member')
             console.log(err)
         }
+        clnt.connect(err => {
+            //adds the ban to the database in mongodb
+
+            clnt.db('BotDB').collection('Bans').insertOne({
+                user: `${target.user.tag} (${target.user.id})`,
+                type: "Ban",
+                reason: reason ? reason : "No reason provided",
+                moderator: `${interaction.user.tag} (${interaction.user.id})`,
+                date: moment(interaction.createdAt).format('dddd, MMMM Do YYYY, HH:mm:ss')
+            })
+
+        });
     } else {
         const no = new Discord.MessageEmbed
         no

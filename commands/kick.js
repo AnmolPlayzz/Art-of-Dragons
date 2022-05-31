@@ -118,6 +118,18 @@ module.exports = {
                 target.kick(reason).then(
                     interaction.reply({embeds: [embed]})
                 )
+
+                clnt.connect(err => {
+
+                    clnt.db('BotDB').collection('Bans').insertOne({
+                        user: `${target.user.tag} (${target.user.id})`,
+                        type: "Kick",
+                        reason: reason ? reason : "No reason provided",
+                        moderator: `${interaction.user.tag} (${interaction.user.id})`,
+                        date: moment(interaction.createdAt).format('dddd, MMMM Do YYYY, HH:mm:ss')
+                    })
+       
+                });
             }catch(err) {
                 interaction.reply('I am unable to kick this member')
                 console.log(err)

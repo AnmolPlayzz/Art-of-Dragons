@@ -17,6 +17,17 @@ const client = new Client({ intents:
 	partials: ['MESSAGE', 'CHANNEL', 'REACTION']
  });
 
+ 
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const { urlencoded } = require('express');
+const pass = encodeURIComponent("AndyL149@#")
+const uri = `mongodb+srv://idk:${pass}@cluster0.1eqb8.mongodb.net/?retryWrites=true&w=majority`;
+const clnt = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+clnt.connect(err => {
+
+});
+
+
 // @ts-ignore
 client.commands = new Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -36,7 +47,7 @@ client.on('interactionCreate', async interaction => {
 	if (!command) return;
 
 	try {
-		await command.execute(interaction, client);
+		await command.execute(interaction, client, clnt);
 	} catch (error) {
 		console.error(error);
 	}
