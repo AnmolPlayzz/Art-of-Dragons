@@ -94,6 +94,9 @@ module.exports = {
             `**/ban (user) (reason):** Ban a member\n` +
             `**/kick (user) (reason):** Kick a member\n` +
             `**/mute (user) (time) (reason):** Mute a member\n` +
+            `**/warn (user) (reason):** Warn a member and save it to the database\n` +
+            `**/modlogs (user):** Get the mod logs of a member\n` +
+            `**/mylogs:** Get your mod logs\n` +
             `**/purge (amount):** Purge messages\n` +
             `**/slowmode (time) (reason):** Set this channel's slowmode`
         )
