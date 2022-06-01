@@ -146,8 +146,13 @@ client.on('interactionCreate', async interaction => {
   });
 
   client.on('interactionCreate', async interaction => {
-	const intdata = JSON.stringify(interaction.options.data).replace(/\"/g, '').replace(/\,/g, '\n').replace(/\:/g, ': ').replace(/\{/g, '----\n').replace(/\}/g, '\n----').replace(/\[/g, '').replace(/\]/g, '');
-	console.log(intdata);
+	var inttext;
+	if (!interaction.options) {
+	  inttext = "No options";
+	} else {
+	  inttext = interaction.options.data.map(log => `${log.name}:\`${log.value}\``).join(', ');
+	}
+	console.log(inttext)
 	const inlog = new Discord.MessageEmbed()
 	  .setAuthor(`Interaction Log`)
 	  .setTitle(`${interaction.member.user.tag}`)
@@ -160,6 +165,11 @@ client.on('interactionCreate', async interaction => {
 		  name: `Interaction`,
 		  value: `${interaction.commandName ? interaction.commandName : "Unknown - Probably a message component like buttons or select menus"}`,
 		  inline: true
+		},
+		{
+			name: `Interaction data`,
+			value: `${inttext ? inttext : "No options"}`,
+			inline: true
 		},
 		{
 		  name: `Interaction channel`,
@@ -192,7 +202,6 @@ client.on('interactionCreate', async interaction => {
 	
 	const MessageLog = client.channels.cache.find(channel => channel.id === "980767716686323714");
 	MessageLog.send({ embeds: [inlog] });
-	MessageLog.send(`Interaction Data:\n\`\`\`json\n${intdata}\`\`\``);
   });
   
 client.login(token);
