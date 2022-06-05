@@ -20,6 +20,7 @@ const client = new Client({ intents:
  
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const { urlencoded } = require('express');
+const { nextTick } = require('process');
 const pass = encodeURIComponent("AndyL149@#")
 const uri = `mongodb+srv://idk:${pass}@cluster0.1eqb8.mongodb.net/?retryWrites=true&w=majority`;
 const clnt = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
@@ -112,14 +113,14 @@ client.on('messageUpdate', (oldMessage, newMessage, message) => {
   client.on('messageDelete', (message) => {
   
 	if (((message.guild || {}).id) == guildId) {
-	  if (message.author.bot) return;
+
 	  const nm = message;
 	  const MessageLog = client.channels.cache.find(channel => channel.id === log);
 	  const del = new Discord.MessageEmbed()
   
 	  del
 		.setAuthor(`Message delete Log`)
-		.setTitle(`${message.author.username}`)
+		.setTitle(`${message.author.tag}`)
 		.setDescription(`**Deleted message content:** ${message.content} \n **Message channel:** ${message.channel}`)
 		.setThumbnail(message.author.displayAvatarURL({ dynamic: true }))
 		.setTimestamp()
@@ -204,4 +205,56 @@ client.on('interactionCreate', async interaction => {
 	MessageLog.send({ embeds: [inlog] });
   });
   
+
+client.on('messageCreate', async message => {
+	function getRandomInt(max) {
+		return Math.floor(Math.random() * max);
+	  }
+	if (message.author.bot) return;
+	const lvl = await clnt.db("BotDB").collection('levels');
+	//create a new record if the user doesn't exist
+	const doc = await lvl.findOne({ userID: message.author.id });
+	//clnt.db("BotDB").collection('levels').deleteOne({ userID: message.author.id });
+	if (!doc) {
+	  await lvl.insertOne({
+		userID: message.author.id,
+		level: 0,
+		xp: 0
+	  });
+	} else {
+		//define the variables for leach level
+		const curxp = doc.xp;
+
+		//add the xp
+		await lvl.updateOne(
+		  { userID: message.author.id },
+		  {
+			$set: {
+			  xp: curxp + getRandomInt(6)
+			}
+		  });
+		//check if xp is enough to level up
+		const newdoc = await lvl.findOne({ userID: message.author.id });
+		const curlvl = newdoc.level;
+		const curxp2 = newdoc.xp;
+		let nxtlvl = Math.round(curlvl * 100);
+		//if xp is enough, level up
+		console.log(nxtlvl)
+		if (curxp2 >= nxtlvl) {
+		  await lvl.updateOne(
+			{ userID: message.author.id },
+			{
+			  $set: {
+				level: curlvl + 1,
+				xp: 0
+			  }
+			}).then(() => {
+			  message.reply(`You have leveled up! You are now level ${curlvl + 1}`);
+			}
+		  );
+		}
+	  }
+	}
+);
+
 client.login(token);

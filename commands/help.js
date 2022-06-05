@@ -104,6 +104,18 @@ module.exports = {
         .setFooter(`Requested by ${interaction.user.tag}`)
         .setTimestamp()
        
+        const embed8 = new Discord.MessageEmbed()
+        embed8
+        .setTitle("Leveling Commands")
+        .setDescription(
+            `**/rank (user):** View the level of a person\n` +
+            `**/leaderboard:** View the server leaderboard\n` +
+            `**/setlevel (user) (level):** Set the level of a user.\n`
+        )
+        .setColor("PURPLE")
+        .setFooter(`Requested by ${interaction.user.tag}`)
+        .setTimestamp()
+
         const row = new MessageActionRow()
             .addComponents(
                 new MessageSelectMenu()
@@ -147,6 +159,12 @@ module.exports = {
                             emoji: "🔨"
                         },
                         {
+                            label: "Leveling Commands",
+                            value: "h",
+                            description: "Leveling Commands",
+                            emoji: "🏆"
+                        },
+                        {
                             label: "Main Menu",
                             value: "g",
                             description: "The Main Menu",
@@ -179,6 +197,9 @@ module.exports = {
                 }
                 if(interaction.values[0] === 'g') {
                     await interaction.update({ embeds: [embed], components: [row] })
+                }
+                if(interaction.values[0] === 'h') {
+                    await interaction.update({ embeds: [embed8], components: [row] })
                 }
               }
             }

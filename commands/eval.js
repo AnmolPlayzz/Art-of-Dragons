@@ -8,7 +8,7 @@ module.exports = {
         .setDescription('Evals a code snippet (Only for the bot owners aka Anmol and FiFi)')
         .addStringOption(option => option.setName('code').setDescription('The code to eval').setRequired(true)),
 
-    async execute(interaction, client) {
+    async execute(interaction, client, clnt) {
     try {
 
         if (interaction.user.id !== '770548285656006666' && interaction.user.id !== '709270334649663538' && interaction.user.id !== '717070380795428866' && interaction.user.id !== '885771287811747851') return interaction.reply("You are not an owner");
