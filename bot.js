@@ -1,4 +1,4 @@
-
+const keepAlive = require('./server.js');
 const fs = require('fs');
 const { Client, Collection, Intents, MessageActionRow, MessageButton } = require('discord.js');
 const Discord = require("discord.js");
@@ -258,3 +258,5 @@ client.on('messageCreate', async message => {
 );
 
 client.login(token);
+
+keepAlive();
