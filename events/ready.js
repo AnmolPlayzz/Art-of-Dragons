@@ -41,9 +41,6 @@ module.exports = {
     )
     console.log(
       chalk.white(`Prefix: /`),
-      chalk.white("||"),
-      chalk.red(`${client.commands.size}`),
-      chalk.white(`Commands`)
     );
     console.log("")
     console.log(chalk.red.bold("——————————[Statistics]——————————"))
