@@ -30,7 +30,6 @@ module.exports = {
     //await client.channels.cache.get("940465975097196574").send({embeds: [embed]})
     //const hmm = await client.channels.cache.get("940465975097196574").send({embeds: [embed1], components: [row]})
 
-	console.clear();
     console.log(chalk.green.bold("Success!"))
     console.log(chalk.gray("Connected To"), chalk.yellow(`${client.user.tag}`));
     console.log(
