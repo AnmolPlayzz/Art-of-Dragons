@@ -1,0 +1,37 @@
+FROM ubuntu:latest
+
+RUN apt-get update 
+
+RUN apt-get upgrade -y
+
+RUN apt-get dist-upgrade -y --fix-missing
+
+RUN apt install -y sudo
+
+RUN sudo apt install -y curl
+
+RUN sudo apt-get install -y
+
+RUN sudo apt-get install -y libtool
+
+RUN sudo apt-get install -y git
+
+RUN sudo apt-get install -y ffmpeg --fix-missing
+
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+
+RUN sudo apt-get install -y nodejs
+
+RUN git clone https://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@github.com/AnmolPlayzz/Art-of-Dragons.git
+
+RUN sudo apt-get install -y make
+
+RUN sudo apt-get install -y build-essential
+
+RUN cd Art-of-Dragons && rm -rf ~/.node-gyp && npm install
+
+EXPOSE 8080
+
+WORKDIR /Art-of-Dragons
+
+CMD ["npm", "run", "dep"]
