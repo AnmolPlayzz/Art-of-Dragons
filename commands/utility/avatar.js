@@ -9,7 +9,7 @@ module.exports = {
 	async execute(interaction) {
 		try {
 			const Target = interaction.options.getUser('user') || interaction.member;
-			const emb = new Discord.MessageEmbed()
+			const emb = new Discord.EmbedBuilder()
 			.setTitle(`${Target.tag? Target.tag : interaction.member.user.tag}\`s Avatar`)
 			.setImage(Target.displayAvatarURL({ dynamic: true, size: 2048 }))
 			.setColor("BLURPLE")

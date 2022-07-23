@@ -9,7 +9,7 @@ module.exports = {
     try {
           
         const text = interaction.guild.channels.cache.size - interaction.guild.channels.cache.filter(c => c.type !== "GUILD_VOICE").size - interaction.guild.channels.cache.filter(c => c.type !== "GUILD_CATEGORY").size;
-        const server = new Discord.MessageEmbed
+        const server = new Discord.EmbedBuilder
         server
         .setAuthor(
             interaction.guild.name,

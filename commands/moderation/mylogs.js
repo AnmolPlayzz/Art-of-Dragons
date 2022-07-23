@@ -18,18 +18,18 @@ module.exports = {
         console.log(logstext);
         const split = logstext.split('\n\n');
         const pages = split.map(log => {
-            return new Discord.MessageEmbed()
+            return new Discord.EmbedBuilder()
                 .setColor('2f3136')
                 .setTitle(`Your moderation logs`)
                 .setThumbnail(ur.avatarURL())
                 .setDescription(log)
                 .setFooter(`Total logs: ${count}`);
         });
-        const button1 = new Discord.MessageButton()
+        const button1 = new Discord.ButtonBuilder()
         .setCustomId('previousbtn')
         .setLabel('Previous')
         .setStyle('DANGER');
-        const button2 = new Discord.MessageButton()
+        const button2 = new Discord.ButtonBuilder()
         .setCustomId('nextbtn')
         .setLabel('Next')
         .setStyle('SUCCESS');

@@ -18,7 +18,7 @@ module.exports = {
 
         const { RoundChart } = require('web-graphs');
 
-        const pollembed = new Discord.MessageEmbed()
+        const pollembed = new Discord.EmbedBuilder()
         .setTitle('Poll')
         .setDescription(`\n\nPoll: **${poll}**\n~~+-------------------------------------+~~\nPoll ends in: **${ms(mstime, { long: true })}**`)
         .setFooter(`Created by ${interaction.user.tag}`,interaction.user.displayAvatarURL())
@@ -100,7 +100,7 @@ module.exports = {
                 const stream = chartJSNodeCanvas.renderToStream(cfg);
                 const attachment = new Discord.MessageAttachment(image, "chart.png")
     
-                const res = new Discord.MessageEmbed()
+                const res = new Discord.EmbedBuilder()
                 .setTitle('Poll Results')
                 .setDescription(`\nPoll: **${poll}**\n`)
                 .setFields(

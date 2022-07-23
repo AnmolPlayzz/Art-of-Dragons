@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const Discord = require('discord.js');
-const { MessageButton } = require('discord.js');
+const { ButtonBuilder } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('nitro')
@@ -8,9 +8,9 @@ module.exports = {
     async execute(interaction, client) {
     try {
             
-        const embed = new Discord.MessageEmbed().setTitle("You've been gifted a subscription!").setColor('#2f3136').setDescription('**Anmol#4838** gifted you Nitro for **1 month!**').setThumbnail('https://cdn.discordapp.com/attachments/912064093316333648/941298775014658078/nitro.png');
+        const embed = new Discord.EmbedBuilder().setTitle("You've been gifted a subscription!").setColor('#2f3136').setDescription('**Anmol#4838** gifted you Nitro for **1 month!**').setThumbnail('https://cdn.discordapp.com/attachments/912064093316333648/941298775014658078/nitro.png');
 
-        const row = new Discord.MessageActionRow().addComponents(new MessageButton().setCustomId('nitroAccept').setLabel('Accept').setStyle('SUCCESS'));
+        const row = new Discord.ActionRowBuilderBuilder().addComponents(new ButtonBuilder().setCustomId('nitroAccept').setLabel('Accept').setStyle('SUCCESS'));
         interaction.reply({embeds: [embed], components: [row]})
     
         client.on('interactionCreate', (interaction) => {

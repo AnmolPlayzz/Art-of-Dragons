@@ -1,19 +1,19 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageActionRow, MessageSelectMenu, MessageButton, MessageEmbed } = require('discord.js');
+const { ActionRowBuilderBuilder, MessageSelectMenu, ButtonBuilder, EmbedBuilder } = require('discord.js');
 const Discord = require('discord.js');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('help')
 		.setDescription('Get the help menu!'),
 	async execute(interaction, client) {
-        const embed = new Discord.MessageEmbed()
+        const embed = new Discord.EmbedBuilder()
         embed
         .setTitle('Hey!')
         .setDescription("This bot has moved to slash commands. Use `/` to bring up all the commands.\nUse the Drop Down Menu given below to navigate through the help menu")
         .setColor("AQUA")
         .setTimestamp()
         .setFooter(`Requested by ${interaction.user.tag}`)
-        const embed2 = new Discord.MessageEmbed()
+        const embed2 = new Discord.EmbedBuilder()
         embed2
         .setTitle("Fun Commands")
         .setDescription(
@@ -35,7 +35,7 @@ module.exports = {
         .setColor("ORANGE")
         .setFooter(`Requested by ${interaction.user.tag}`)
         .setTimestamp()
-        const embed3 = new Discord.MessageEmbed()
+        const embed3 = new Discord.EmbedBuilder()
         embed3
         .setTitle("Miscellanous Commands")
         .setDescription(
@@ -46,7 +46,7 @@ module.exports = {
         .setColor("YELLOW")
         .setFooter(`Requested by ${interaction.user.tag}`) 
         .setTimestamp()
-        const embed4 = new Discord.MessageEmbed()
+        const embed4 = new Discord.EmbedBuilder()
         embed4
         .setTitle("Utility Commands")
         .setDescription(
@@ -65,7 +65,7 @@ module.exports = {
         .setFooter(`Requested by ${interaction.user.tag}`) 
         .setTimestamp()
         
-        const embed5 = new Discord.MessageEmbed()
+        const embed5 = new Discord.EmbedBuilder()
         embed5
         .setTitle("Discord Together Commands")
         .setDescription(
@@ -76,7 +76,7 @@ module.exports = {
         .setFooter(`Requested by ${interaction.user.tag}`)
         .setTimestamp()
 
-        const embed6 = new Discord.MessageEmbed()
+        const embed6 = new Discord.EmbedBuilder()
         embed6
         .setTitle("Game Commands")
         .setDescription(
@@ -87,7 +87,7 @@ module.exports = {
         .setColor("DARK_RED")
         .setFooter(`Requested by ${interaction.user.tag}`)
         .setTimestamp()
-        const embed7 = new Discord.MessageEmbed()
+        const embed7 = new Discord.EmbedBuilder()
         embed7
         .setTitle("Moderation Commands")
         .setDescription(
@@ -104,7 +104,7 @@ module.exports = {
         .setFooter(`Requested by ${interaction.user.tag}`)
         .setTimestamp()
        
-        const embed8 = new Discord.MessageEmbed()
+        const embed8 = new Discord.EmbedBuilder()
         embed8
         .setTitle("Leveling Commands")
         .setDescription(
@@ -116,7 +116,7 @@ module.exports = {
         .setFooter(`Requested by ${interaction.user.tag}`)
         .setTimestamp()
 
-        const row = new MessageActionRow()
+        const row = new ActionRowBuilderBuilder()
             .addComponents(
                 new MessageSelectMenu()
                     .setCustomId('sel')

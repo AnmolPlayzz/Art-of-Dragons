@@ -17,7 +17,7 @@ module.exports = {
     
             const uptime = `\`\`\`${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds\`\`\``;
     
-            const embed = new Discord.MessageEmbed()
+            const embed = new Discord.EmbedBuilder()
             .setTitle(`${interaction.client.user.username} Stats`)
             .addFields(
               { name: "Servers:", value: `\`\`\`${client.guilds.cache.size}\`\`\``, inline: true },

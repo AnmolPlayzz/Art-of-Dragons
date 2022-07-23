@@ -17,7 +17,7 @@ module.exports = {
 if(target.user.id === interaction.member.user.id) {
     interaction.reply("<:No:901477337437204481> You can't warn yourself!");
 } else {
-        const dm = new Discord.MessageEmbed()
+        const dm = new Discord.EmbedBuilder()
         .setTitle(`You were warned in ${interaction.guild.name}`)
         .setThumbnail(target.user.displayAvatarURL({ dynamic: true, size: 1024 }))
         .setColor('FF6461')
@@ -35,7 +35,7 @@ if(target.user.id === interaction.member.user.id) {
         ])
         .setTimestamp()
 
-        const embed = new Discord.MessageEmbed()
+        const embed = new Discord.EmbedBuilder()
                 .setTitle(`${target.user.tag} has been warned`)
                 .setThumbnail(target.user.displayAvatarURL({dynamic: true, size: 1024}))
                 .setColor('FF6461')
@@ -73,7 +73,7 @@ if(target.user.id === interaction.member.user.id) {
         });
     }
         } else {
-            const nop1 = new Discord.MessageEmbed
+            const nop1 = new Discord.EmbedBuilder
             nop1
                 .setColor('DARK_RED')
                 .setDescription('<:No:901477337437204481> You do not have the `KICK_MEMBERS` permission!')

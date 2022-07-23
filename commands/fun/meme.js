@@ -9,9 +9,9 @@ module.exports = {
     async execute(interaction, client) {
     try {
 
-        const row = new Discord.MessageActionRow()
+        const row = new Discord.ActionRowBuilderBuilder()
         .addComponents(
-          new Discord.MessageButton()
+          new Discord.ButtonBuilder()
           .setLabel("Next meme")
           .setStyle("PRIMARY")
           .setCustomId("meme")
@@ -26,7 +26,7 @@ module.exports = {
       const memeUpvotes = content[0].data.children[0].data.ups
       const memeDownVotes = content[0].data.children[0].data.downs1 
   
-      const embed = new Discord.MessageEmbed()
+      const embed = new Discord.EmbedBuilder()
         embed.setTitle(`${memeTitle}`)
           .setTimestamp()
           .setURL(`${memeURl}`)
@@ -47,7 +47,7 @@ module.exports = {
               const memeTitle = content[0].data.children[0].data.title
               const memeUpvotes = content[0].data.children[0].data.ups
               const memeDownVotes = content[0].data.children[0].data.downs1 
-              const embed = new Discord.MessageEmbed()
+              const embed = new Discord.EmbedBuilder()
               embed
               .setTitle(`${memeTitle}`)
               .setTimestamp()

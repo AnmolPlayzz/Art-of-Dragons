@@ -8,7 +8,7 @@ module.exports = {
     try {
 
         const roles = interaction.guild.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString());
-        const embed = new Discord.MessageEmbed()
+        const embed = new Discord.EmbedBuilder()
         .setColor('WHITE')
         .setDescription(roles.join('\n'))
         await interaction.reply({embeds: [embed]});

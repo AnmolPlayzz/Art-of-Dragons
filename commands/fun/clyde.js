@@ -12,8 +12,8 @@ module.exports = {
 		const data = await fetch(
 		  `https://nekobot.xyz/api/imagegen?type=clyde&text=${text}`
 		).then(res => res.json());
-		const embed = new Discord.MessageEmbed()
-		.setColor("WHITE")
+		const embed = new Discord.EmbedBuilder()
+		.setColor('White')
 		.setDescription(
 			`[Click me if the image failed to load.](${data.message})`
 		  )

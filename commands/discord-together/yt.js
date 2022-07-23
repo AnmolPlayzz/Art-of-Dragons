@@ -15,14 +15,14 @@ module.exports = {
         
         if(interaction.member.voice.channel) {
             client.discordTogether.createTogetherCode(interaction.member.voice.channel.id, 'youtube').then(async invite => {
-                const yt = new Discord.MessageEmbed;
+                const yt = new Discord.EmbedBuilder;
                 yt
-                .setAuthor('YouTube Together', 'https://i.imgur.com/raE8eQy.png')
+                .setAuthor({name:'YouTube Together', iconURL:'https://i.imgur.com/raE8eQy.png'})
                 .setTitle(`Hey!!`)
                 .setDescription(`To join this activity click on the link below\n[**__Click me to join YouTube Together!!__**](${invite.code})\n\n__**NOTE:**__ This works only for PC`)
                 .setColor("FF6565")
                 .setTimestamp()
-                .setFooter(`Requested by ${interaction.user.tag}`)
+                .setFooter({text:`Requested by ${interaction.user.tag}`})
                 interaction.reply({ embeds: [yt] });   
             });
         }

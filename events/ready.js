@@ -6,21 +6,21 @@ module.exports = {
 	once: true,
 	execute(client) {
     
-    const embed = new Discord.MessageEmbed();
+    const embed = new Discord.EmbedBuilder();
     embed
-    .setColor(3092790)
-    .setImage("https://cdn.discordapp.com/attachments/916295424866914335/949235697804537886/A.png")
+      .setColor(3092790)
+      .setImage("https://cdn.discordapp.com/attachments/916295424866914335/949235697804537886/A.png")
 
-    const row = new Discord.MessageActionRow()
-    .addComponents(
-      new Discord.MessageButton()
-        .setCustomId('aaa')
-        .setLabel('OTD Ping')
-        .setStyle('PRIMARY')
-        .setEmoji("📅"),
-    );
+    const row = new Discord.ActionRowBuilder()
+      .addComponents(
+        new Discord.ButtonBuilder()
+          .setCustomId('aaa')
+          .setLabel('OTD Ping')
+          .setStyle(Discord.ButtonStyle.Primary)
+          .setEmoji("📅"),
+      );
     
-    const embed1 = new Discord.MessageEmbed();
+    const embed1 = new Discord.EmbedBuilder();
     embed1
     .setColor(3092790)
     .setTitle("Self Roles")

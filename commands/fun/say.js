@@ -11,7 +11,7 @@ module.exports = {
         const say = interaction.options.getString('message');
 
         if(say.includes('<@') || say.includes('<@&') || say.includes('@everyone') || say.includes('@here')) {
-            const embed = new Discord.MessageEmbed()
+            const embed = new Discord.EmbedBuilder()
             .setColor('DARK_RED')
             .setDescription('<:No:901477337437204481> You cannot use mentions in the message!!')
             await interaction.reply({embeds: [embed]});

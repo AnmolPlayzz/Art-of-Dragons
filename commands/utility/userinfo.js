@@ -11,7 +11,7 @@ module.exports = {
 		try {
 			const Target = interaction.options.getUser('user') || interaction.member;
             const Member = interaction.guild.members.cache.get(Target.id);
-            const usr = new Discord.MessageEmbed;
+            const usr = new Discord.EmbedBuilder;
             usr
             .setAuthor(`${Member.user.tag}`, Member.user.avatarURL({ dynamic: true }))
             .setTitle(`User Info`)

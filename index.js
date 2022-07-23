@@ -1,18 +1,17 @@
 const keepAlive = require('./server.js');
 const fs = require('fs');
-const { Client, Collection, Intents, MessageActionRow, MessageButton } = require('discord.js');
+const { Client, Collection, GatewayIntentBits, ActionRowBuilder, ButtonBuilder } = require('discord.js');
 const Discord = require("discord.js");
 const { token, clientId, guildId, log } = require('./config.json');
 const client = new Client({ intents: 
 	[
-		Intents.FLAGS.GUILDS,
-	 	Intents.FLAGS.GUILD_MEMBERS,
-		Intents.FLAGS.GUILD_VOICE_STATES,
-		Intents.FLAGS.GUILD_MESSAGES,
-		Intents.FLAGS.GUILD_INTEGRATIONS,
-		Intents.FLAGS.GUILDS,
-		Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-		Intents.FLAGS.GUILD_BANS,
+		GatewayIntentBits.Guilds,
+	 	GatewayIntentBits.GuildMembers,
+		GatewayIntentBits.GuildVoiceStates,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.GuildIntegrations,
+		GatewayIntentBits.GuildMessageReactions,
+		GatewayIntentBits.GuildBans,
 	],
 	partials: ['MESSAGE', 'CHANNEL', 'REACTION']
  });
@@ -82,15 +81,15 @@ client.on('messageUpdate', (oldMessage, newMessage, message) => {
 	  if (oldMessage.author.bot) return;
 	  const nm = oldMessage;
 	  const MessageLog = client.channels.cache.find(channel => channel.id === log);
-	  const logrow1 = new MessageActionRow()
+	  const logrow1 = new ActionRowBuilderBuilder()
 		.addComponents(
-		  new MessageButton()
+		  new ButtonBuilder()
 			.setURL(oldMessage.url)
 			.setLabel('Jump to Message')
 			.setStyle('LINK'),
 		);
   
-	  const edit = new Discord.MessageEmbed()
+	  const edit = new Discord.EmbedBuilder()
   
 	  edit
 		.setAuthor(`Message edit Log`)
@@ -126,7 +125,7 @@ client.on('messageUpdate', (oldMessage, newMessage, message) => {
 
 	  const nm = message;
 	  const MessageLog = client.channels.cache.find(channel => channel.id === log);
-	  const del = new Discord.MessageEmbed()
+	  const del = new Discord.EmbedBuilder()
   
 	  del
 		.setAuthor(`Message delete Log`)
@@ -164,13 +163,13 @@ client.on('interactionCreate', async interaction => {
 	  inttext = interaction.options.data.map(log => `${log.name}:\`${log.value}\``).join(', ');
 	}
 	console.log(inttext)
-	const inlog = new Discord.MessageEmbed()
-	  .setAuthor(`Interaction Log`)
+	const inlog = new Discord.EmbedBuilder()
+	  .setAuthor({ name: `Interaction Log`})
 	  .setTitle(`${interaction.member.user.tag}`)
-	  .setDescription(``)
+	  .setDescription(null)
 	  .setThumbnail(interaction.member.user.displayAvatarURL({ dynamic: true }))
 	  .setTimestamp()
-	  .setColor('BLURPLE')
+	  .setColor('Blurple')
 	  .addFields(
 		{
 		  name: `Interaction`,

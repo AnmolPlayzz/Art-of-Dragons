@@ -23,7 +23,7 @@ module.exports = {
             if (typeof evaled !== 'string')
                 evaled = require('util').inspect(evaled);
 
-            const embed = new Discord.MessageEmbed()
+            const embed = new Discord.EmbedBuilder()
                 .setColor('#a7ff85')
                 .addField('📥 Input: ', `\`\`\`${code}\`\`\``)
                 .addField(
@@ -33,7 +33,7 @@ module.exports = {
             interaction.reply({ embeds: [embed] });
 
         } catch (err) {
-            const embed = new Discord.MessageEmbed()
+            const embed = new Discord.EmbedBuilder()
                 .setColor('#ff8585')
                 .addField('📥 Input: ', `\`\`\`${code}\`\`\``)
                 .addField(

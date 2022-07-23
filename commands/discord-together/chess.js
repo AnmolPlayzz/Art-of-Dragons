@@ -15,14 +15,14 @@ module.exports = {
         
         if(interaction.member.voice.channel) {
             client.discordTogether.createTogetherCode(interaction.member.voice.channel.id, 'chess').then(async invite => {
-                const ch = new Discord.MessageEmbed;
+                const ch = new Discord.EmbedBuilder;
                 ch
-                .setAuthor('Chess', 'https://media.discordapp.net/attachments/882167333651619840/941958226272976926/kindpng_971360_1.png?width=325&height=325')
+                .setAuthor({ name:'Chess', iconURL:'https://media.discordapp.net/attachments/882167333651619840/941958226272976926/kindpng_971360_1.png?width=325&height=325'})
                 .setTitle(`Hey!!`)
                 .setDescription(`To join this activity click on the link below\n[**__Click me to join Chess!!__**](${invite.code})\n\n__**NOTE:**__ This works only for PC`)
                 .setColor("FAC589")
                 .setTimestamp()
-                .setFooter(`Requested by ${interaction.user.tag}`)
+                .setFooter({text:`Requested by ${interaction.user.tag}`})
                 return interaction.reply({ embeds: [ch] });   
             });
         }

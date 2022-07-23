@@ -31,7 +31,7 @@ module.exports = {
             else;
         }
         const flr = finalPermissions.join(', ')
-        const embed = new Discord.MessageEmbed()
+        const embed = new Discord.EmbedBuilder()
             .setColor(role.hexColor.toUpperCase())
             .setFooter(`Requested by ${interaction.user.tag} `)
             .setTimestamp()

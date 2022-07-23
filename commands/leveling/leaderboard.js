@@ -10,7 +10,7 @@ module.exports = {
         //use .map to covert to string
         let cnt = 1;
         const dtb2 = dtb.map(x => `**#${cnt++}**<@!${x.userID}> (${x.userID}) | \`Level:\` ${x.level} - \`XP:\` ${x.xp}`).join('\n');
-        const embed = new Discord.MessageEmbed()
+        const embed = new Discord.EmbedBuilder()
             .setColor('#0099ff')
             .setTitle('Leaderboard')
             .setDescription(dtb2)

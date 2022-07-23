@@ -7,7 +7,7 @@ module.exports = {
     async execute(interaction, client) {
     try {
             
-        const embed = new Discord.MessageEmbed();
+        const embed = new Discord.EmbedBuilder();
         const a = (interaction.guild.memberCount)
             embed
                 .setTitle(`Number of members in **${interaction.guild.name}**`)

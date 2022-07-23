@@ -22,7 +22,7 @@ module.exports = {
                 if(isNaN(time)) {
                     return interaction.reply("Provide a valied time")
                 } else {
-                    const embed = new Discord.MessageEmbed();
+                    const embed = new Discord.EmbedBuilder();
                 
                     embed
                         .setDescription(`✅ | \`Set slowmodee to ${time} || Reason: ${reason}\``)
